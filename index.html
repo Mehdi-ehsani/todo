@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="./js/all.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="add-todo-container">
+        <form action="" class="add-todo-container">
+          <input type="text" id="input" placeholder="Write the todo" />
+          <div class="btn" >
+            <input type="submit" id="submit" value="Add Todo" />
+            <span id="one"></span>
+            <span id="two"></span>
+          </div>
+        </form>
+      </div>
+      <div class="select">
+        <h1>Todos</h1>
+        <div class="option">
+          <select name="" id="select">
+            <option value="All">All</option>
+            <option value="Complited">Complited</option>
+            <option value="Uncomplited">Uncomplited</option>
+          </select>
+          <span><div>></div></span>
+        </div>
+      </div>
+      <div class="todo-container">
+         <div class="img">
+          <img src="./img/empty.png" alt="">
+          <h3>Todo list is empty</h3>
+         </div>
+       
+      </div>
+    </div>
+    <script src="./main.js"></script>
+  </body>
+</html>
