@@ -22,7 +22,7 @@ body {
   height: 46px;
   display: flex;
   justify-content: space-between;
-  background: rgb(240, 239, 239);
+ 
 }
 .add-todo-container input {
   background: none;
@@ -320,6 +320,9 @@ h1 {
   }
   .todo .date {
     margin-right: 7px; 
+  }
+  .add-todo-container {
+    background: rgb(240, 239, 239);
   }
 }
 @media (min-height: 765px) {
