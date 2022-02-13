@@ -5,6 +5,9 @@ const todoX = document.querySelector(".todo");
 const filter  = document.querySelector("#select");
 
 filter.addEventListener("click" ,event => {
+ 
+
+
    const todo = todoCon.childNodes;
    let num = 1;
    todo.forEach(todos => {
@@ -449,7 +452,7 @@ function getTodos () {
        
     });
     
-    todos = JSON.parse(localStorage.getItem("todos"));
+    let todo  = JSON.parse(localStorage.getItem("todos"));
     if(todos.length == 0 ){
         const img = document.querySelector(".img");
         img.style.display = "flex";
