@@ -47,138 +47,96 @@ document.addEventListener("DOMContentLoaded" , getTodos);
 
 addTodo.addEventListener("click" , () => {
     let text = todoText.value;
-
-
-    const Ctodo = document.createElement("div");
-    Ctodo.classList.add("todo");
-    
-    const Cinput = document.createElement("input");
-    Cinput.setAttribute("type" , "text");
-    Cinput.setAttribute("readonly" , "readonly");
-    Cinput.id = "todo-input";
-    Cinput.setAttribute("value" , text);
-    
-    
-    
-    const CmenuBtn = document.createElement("div");
-    CmenuBtn.classList.add("menu");
-
-    const Cdate = document.createElement("div");
-    Cdate.classList.add("date");
-     
-    const getDate = new Date();
-    const day = getDate.getDate();
-    let month = getDate.getMonth();
-    const year = getDate.getFullYear();
-    month = month + 1;
-    Cdate.innerText = `${year}/${month}/${day}`
-
-    const Cicon = document.createElement("i");
-    Cicon.classList.add("fas");
-    Cicon.classList.add("fa-ellipsis-v");
-    Cicon.classList.add("icon");
-    
-
-    const Cmenu = document.createElement("div");
-    Cmenu.classList.add("after");
-    Cmenu.classList.add("not");
-  
-   
-    
-    const Cul = document.createElement("ul");
-    const Cedit = document.createElement("li");
-    const Ctick = document.createElement("li");
-    const Cdelete = document.createElement("li");
-    Cedit.classList.add( "edit");
-    Ctick.classList.add(  "tick");
-    Cdelete.classList.add("delete");
-    Cedit.innerText = "Edit";
-    Ctick.innerText = "Complited";
-    Cdelete.innerText = "Delete";
-    Cul.appendChild(Cedit);
-    Cul.appendChild(Ctick);
-    Cul.appendChild(Cdelete);
-
-    Cmenu.appendChild(Cul);
-    CmenuBtn.appendChild(Cicon);
-    Ctodo.appendChild(Cinput);
-    Ctodo.appendChild(Cdate);
-    Ctodo.appendChild(CmenuBtn);
-    Ctodo.appendChild(Cmenu);
-
-    todoCon.appendChild(Ctodo)
-    
-
-    saveLocalTodo(todoText.value , Cdate.innerText);
-
-
-    todoText.value = "";
-
-    CmenuBtn.addEventListener("click" , toggle);
-    function toggle () {
-    Cmenu.classList.toggle("not");
-    Ctodo.classList.toggle("margin");
-    setTimeout(() => {
-        Ctodo.classList.remove("margin");
-        Cmenu.classList.add("not");
-
-    },12000)
-    
-    
-    }
-    let value;
-    Cedit.addEventListener("click" , () => {
-    if(Cedit.innerText == "Edit"){
-     Cinput.removeAttribute("readonly");
-     Cinput.focus();
-     Cinput.style.animationName = "edit";
-     Cedit.innerText = "Save"
-     value = Cinput.value;
-    }else {
-        const parentUl = event.target.parentElement;
-        const parentDiv = parentUl.parentElement;
-        const parentTodo  = parentDiv.parentElement;
-   
-   let todos;
-   if (localStorage.getItem("todos") === null) {
-       todos = [];
-   } else {
-       todos = JSON.parse(localStorage.getItem("todos"));
-   }
-    const index =   parentTodo.children[0].value;
-    
-    todos.forEach(item => {
-        const  {todo , date}  = item;
-        if(todo == value) {
-            delete item.todo;
-            item.todo = index
-            
-        }
-    })
-
-   
-    localStorage.setItem("todos", JSON.stringify(todos))
-
-
-
-        Cinput.setAttribute("readonly" , "readonly");
-        Cedit.innerText = "Edit"
-        Cinput.style.animationName = "none";
-    }
- })
-    Ctick.addEventListener("click" , () => {
-    Ctodo.classList.toggle("tick");
-    if(Ctodo.classList.length == 2){
-        Ctick.innerText = "Complited"
-    }else {
+    if(text.length > 1) {
+        const Ctodo = document.createElement("div");
+        Ctodo.classList.add("todo");
         
-        Ctick.innerText = "unComplited"
-    }
- })
-   Cdelete.addEventListener("click" , event => {
-       const parentUl = event.target.parentElement;
-       const parentDiv = parentUl.parentElement;
-       const parentTodo  = parentDiv.parentElement;
+        const Cinput = document.createElement("input");
+        Cinput.setAttribute("type" , "text");
+        Cinput.setAttribute("readonly" , "readonly");
+        Cinput.id = "todo-input";
+        Cinput.setAttribute("value" , text);
+        
+        
+        
+        const CmenuBtn = document.createElement("div");
+        CmenuBtn.classList.add("menu");
+    
+        const Cdate = document.createElement("div");
+        Cdate.classList.add("date");
+         
+        const getDate = new Date();
+        const day = getDate.getDate();
+        let month = getDate.getMonth();
+        const year = getDate.getFullYear();
+        month = month + 1;
+        Cdate.innerText = `${year}/${month}/${day}`
+    
+        const Cicon = document.createElement("i");
+        Cicon.classList.add("fas");
+        Cicon.classList.add("fa-ellipsis-v");
+        Cicon.classList.add("icon");
+        
+    
+        const Cmenu = document.createElement("div");
+        Cmenu.classList.add("after");
+        Cmenu.classList.add("not");
+      
+       
+        
+        const Cul = document.createElement("ul");
+        const Cedit = document.createElement("li");
+        const Ctick = document.createElement("li");
+        const Cdelete = document.createElement("li");
+        Cedit.classList.add( "edit");
+        Ctick.classList.add(  "tick");
+        Cdelete.classList.add("delete");
+        Cedit.innerText = "Edit";
+        Ctick.innerText = "Complited";
+        Cdelete.innerText = "Delete";
+        Cul.appendChild(Cedit);
+        Cul.appendChild(Ctick);
+        Cul.appendChild(Cdelete);
+    
+        Cmenu.appendChild(Cul);
+        CmenuBtn.appendChild(Cicon);
+        Ctodo.appendChild(Cinput);
+        Ctodo.appendChild(Cdate);
+        Ctodo.appendChild(CmenuBtn);
+        Ctodo.appendChild(Cmenu);
+    
+        todoCon.appendChild(Ctodo)
+        
+    
+        saveLocalTodo(todoText.value , Cdate.innerText);
+    
+    
+        todoText.value = "";
+    
+        CmenuBtn.addEventListener("click" , toggle);
+        function toggle () {
+        Cmenu.classList.toggle("not");
+        Ctodo.classList.toggle("margin");
+        setTimeout(() => {
+            Ctodo.classList.remove("margin");
+            Cmenu.classList.add("not");
+    
+        },12000)
+        
+        
+        }
+        let value;
+        Cedit.addEventListener("click" , () => {
+        if(Cedit.innerText == "Edit"){
+         Cinput.removeAttribute("readonly");
+         Cinput.focus();
+         Cinput.style.animationName = "edit";
+         Cedit.innerText = "Save"
+         value = Cinput.value;
+        }else {
+            const parentUl = event.target.parentElement;
+            const parentDiv = parentUl.parentElement;
+            const parentTodo  = parentDiv.parentElement;
        
        let todos;
        if (localStorage.getItem("todos") === null) {
@@ -190,19 +148,63 @@ addTodo.addEventListener("click" , () => {
         
         todos.forEach(item => {
             const  {todo , date}  = item;
-            if(todo == index) {
-                todos.splice(todos.indexOf(item) , 1);
+            if(todo == value) {
+                delete item.todo;
+                item.todo = index
+                
             }
         })
-
+    
        
         localStorage.setItem("todos", JSON.stringify(todos))
-        parentTodo.remove();
-        location.reload();
-
-       
-
-   })
+    
+    
+    
+            Cinput.setAttribute("readonly" , "readonly");
+            Cedit.innerText = "Edit"
+            Cinput.style.animationName = "none";
+        }
+     })
+        Ctick.addEventListener("click" , () => {
+        Ctodo.classList.toggle("tick");
+        if(Ctodo.classList.length == 2){
+            Ctick.innerText = "Complited"
+        }else {
+            
+            Ctick.innerText = "unComplited"
+        }
+     })
+       Cdelete.addEventListener("click" , event => {
+           const parentUl = event.target.parentElement;
+           const parentDiv = parentUl.parentElement;
+           const parentTodo  = parentDiv.parentElement;
+           
+           let todos;
+           if (localStorage.getItem("todos") === null) {
+               todos = [];
+           } else {
+               todos = JSON.parse(localStorage.getItem("todos"));
+           }
+            const index =   parentTodo.children[0].value;
+            
+            todos.forEach(item => {
+                const  {todo , date}  = item;
+                if(todo == index) {
+                    todos.splice(todos.indexOf(item) , 1);
+                }
+            })
+    
+           
+            localStorage.setItem("todos", JSON.stringify(todos))
+            parentTodo.remove();
+            location.reload();
+    
+           
+    
+       })
+    }
+  
+  
   
 })
 function saveLocalTodo(todo , date) {
